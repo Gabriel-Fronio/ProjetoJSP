@@ -28,14 +28,14 @@ public class DBOUsuario {
     /**
      * @return the nome
      */
-    public String getId() {
+    public String getNome() {
         return nome;
     }
 
     /**
      * @param nome the nome to set
      */
-    public void setId(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
