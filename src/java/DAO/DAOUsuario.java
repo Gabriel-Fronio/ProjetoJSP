@@ -10,7 +10,7 @@ import Connect.*;
 
 public class DAOUsuario {
     
-    public boolean insert(DBOUsuario usr)
+    public static boolean insert(DBOUsuario usr)
     {
         try
         {
@@ -39,33 +39,27 @@ public class DAOUsuario {
         return false;
     }
     
-    public boolean insert(DBOUsuario usr)
+    public static DBOUsuario getUsuario(String email)
     {
+        DBOUsuario usr = null;
         try
         {
-            MeuPreparedStatement bd = DAOs.getBD();//nome, cpf, sexo, dataNasc, tel, cep, end, email, senha
-            String sql = "INSET INTO usuario VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            MeuPreparedStatement bd = DAOs.getBD();
+            String sql = "SELECT * FROM usuario WHERE email = "+email;
             bd.prepareStatement(sql);
-            bd.setString(0, usr.getNome());
-            bd.setString(1, usr.getCpf());
-            bd.setString(2, usr.getSexo()+"");
-            bd.setDate(3, usr.getData());
-            bd.setString(4, usr.getTel());
-            bd.setString(5, usr.getCep());
-            bd.setString(6, usr.getEnd());
-            bd.setString(7, usr.getEmail());
-            bd.setString(8, usr.getSenha());
             
-            int ret = bd.executeUpdate();
-            if (ret > 0)
-                return true;
+            MeuResultSet result = (MeuResultSet)bd.executeQuery();
+            if(result.first())
+                usr = new DBOUsuario(result.getString("nome"), result.getString("cpf"), result.getString("telefone"),
+                        result.getString("cep"), result.getString("endereco"), email, result.getString("senha"), 
+                        result.getString("sexo").charAt(0), result.getDate("dataNasc"));
         }
         catch(Exception e)
         {
             System.out.println(e.getMessage());
-            return false;
+            return null;
         }
-        return false;
+        return usr;
     }
     
 }
