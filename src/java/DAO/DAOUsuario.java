@@ -15,17 +15,17 @@ public class DAOUsuario {
         try
         {
             MeuPreparedStatement bd = DAOs.getBD();//nome, cpf, sexo, dataNasc, tel, cep, end, email, senha
-            String sql = "INSET INTO usuario VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO usuario VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             bd.prepareStatement(sql);
-            bd.setString(0, usr.getNome());
-            bd.setString(1, usr.getCpf());
-            bd.setString(2, usr.getSexo()+"");
-            bd.setDate(3, usr.getData());
-            bd.setString(4, usr.getTel());
-            bd.setString(5, usr.getCep());
-            bd.setString(6, usr.getEnd());
-            bd.setString(7, usr.getEmail());
-            bd.setString(8, usr.getSenha());
+            bd.setString(1, usr.getNome());
+            bd.setString(2, usr.getCpf());
+            bd.setString(3, usr.getSexo()+"");
+            bd.setDate(4, usr.getData());
+            bd.setString(5, usr.getTel());
+            bd.setString(6, usr.getCep());
+            bd.setString(7, usr.getEnd());
+            bd.setString(8, usr.getEmail());
+            bd.setString(9, usr.getSenha());
             
             int ret = bd.executeUpdate();
             if (ret > 0)

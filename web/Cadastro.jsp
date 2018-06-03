@@ -21,7 +21,7 @@
             <input type="radio" name="sexo" id="sexo" value="O">Outro<br>
             Data de Nascimento: <input type="date" name="data" id="data"><br>
             Telefone (apenas dígitos):<input type="text" name="telefone" id="telefone" placeholder="xx999999999" pattern="[0-9]{11}"  title="Numero de telefone apenas com digitos (com DDD)"><br>
-            CEP (apenas dígitos): <input type="text" name="cpf" id="cpf" placeholder="13333333" pattern="[0-9]{8}" title="Código Postal apenas com dígitos"<br>
+            CEP (apenas dígitos): <input type="text" name="cep" id="cep" placeholder="13333333" pattern="[0-9]{8}" title="Código Postal apenas com dígitos"<br>
             Endereço:<input type="text" name="end" id="end" maxlength="70">                Número:<input type="number" name="numero" id="numero"  maxlength="5"><br>
             Bairro:<input type="text" name="bairro" id="bairro" maxlength="40">               Complemento:<input type="text" name="complemento" id="complemento" maxlength="73"><br>
             Cidade:<input type="text" name="cidade" id="cidade" maxlength="60">               UF:<input type="text" name="uf" id="uf" placeholder="XX" pattern="[A-Z]{2}"><br>
