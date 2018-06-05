@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import DAO.DAOUsuario;
 import DBO.DBOUsuario;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 
 
 public class Login extends HttpServlet {
@@ -21,27 +23,39 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        DBOUsuario usr = DAOUsuario.getUsuario(request.getParameter("email"));
-        if(usr != null)
-            //if(usr.getSenha())
-           ;
-        else
+        try
         {
-                
-        }
             
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            response.setContentType("text/html;charset=UTF-8");
+            DBOUsuario usr = DAOUsuario.getUsuario(request.getParameter("email"));
+            if(usr != null)
+            {
+                String senha = request.getParameter("senha");
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(senha.getBytes(), 0, senha.length());
+                senha = (new BigInteger(1,md.digest()).toString(32)).toString();
+                
+                 //if(usr.getSenha() == )
+                 System.out.println("Senha gerada: "+senha);
+                 System.out.println("Senha do BD: "+usr.getSenha());
+            }
+
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet Login</title>");            
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+                out.println("</body>");
+                out.println("</html>");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
         }
     }
 
