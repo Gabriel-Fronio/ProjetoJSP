@@ -34,24 +34,68 @@ public class Login extends HttpServlet {
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 md.update(senha.getBytes(), 0, senha.length());
                 senha = (new BigInteger(1,md.digest()).toString(32)).toString();
-                
-                 //if(usr.getSenha() == )
-                 System.out.println("Senha gerada: "+senha);
-                 System.out.println("Senha do BD: "+usr.getSenha());
+                 
+                 if(!usr.getSenha().equals(senha))
+                 {
+                        try (PrintWriter out = response.getWriter()) {             
+                        out.println(
+                                    "<!DOCTYPE html>\n" +
+                                    "<html>\n" +
+                                    "    <head>\n" +
+                                    "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n" +
+                                    "        <title>Pagina de Login</title>\n" +
+                                    "    </head>\n" +
+                                    "    <body>\n" +
+                                    "        <h1>Login</h1>\n" +
+                                    "        <form method=\"POST\" action=\"Login\" style=\"border: 2px solid black\">\n" +
+                                    "            <span style='color:red;'>Senha incorreta</span><br>" +
+                                    "            E-mail:<input type=\"email\" id=\"email\" name=\"email\">\n" +
+                                    "            <br>\n" +
+                                    "            Senha: <input type=\"password\" id=\"senha\" name=\"senha\">\n" +
+                                    "            <br>\n" +
+                                    "            <input type=\"submit\" value=\"Logar\">\n" +
+                                    "        </form>\n" +
+                                    "        <br>\n" +
+                                    "         Ainda não tem conta? Crie uma <a href=\"Cadastro.jsp\">aqui</a>\n" +
+                                    "    </body>\n" +
+                                    "</html>");
+                   }
+                 }
+                 else
+                 {
+                     response.sendRedirect("Compra.jsp");
+                 }
             }
+            else
+            {
+                try (PrintWriter out = response.getWriter()) {
+                        
+                        out.println(
+                                    "<!DOCTYPE html>\n" +
+                                    "<html>\n" +
+                                    "    <head>\n" +
+                                    "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n" +
+                                    "        <title>Pagina de Login</title>\n" +
+                                    "    </head>\n" +
+                                    "    <body>\n" +
+                                    "        <h1>Login</h1>\n" +
+                                    "        <form method=\"POST\" action=\"Login\" style=\"border: 2px solid black\">\n" +
+                                    "            <span style='color:red'>Usuário não encontrado</span><br>" +
+                                    "            E-mail:<input type=\"email\" id=\"email\" name=\"email\">\n" +
+                                    "            <br>\n" +
+                                    "            Senha: <input type=\"password\" id=\"senha\" name=\"senha\">\n" +
+                                    "            <br>\n" +
+                                    "            <input type=\"submit\" value=\"Logar\">\n" +
+                                    "        </form>\n" +
+                                    "        <br>\n" +
+                                    "         Ainda não tem conta? Crie uma <a href=\"Cadastro.jsp\">aqui</a>\n" +
+                                    "    </body>\n" +
+                                    "</html>");
+                }
+            }
+            
 
-            try (PrintWriter out = response.getWriter()) {
-                /* TODO output your page here. You may use following sample code. */
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet Login</title>");            
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
-            }
+            
         }
         catch(Exception e)
         {

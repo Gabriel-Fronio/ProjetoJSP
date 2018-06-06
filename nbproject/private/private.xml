@@ -3,15 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/web/index.html</file>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/web/Login.jsp</file>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/src/java/Connect/MeuPreparedStatement.java</file>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/src/java/Cadastro.java</file>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/src/java/Connect/DAOs.java</file>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/src/java/Login.java</file>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/src/java/DAO/DAOUsuario.java</file>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/src/java/DBO/DBOUsuario.java</file>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/web/Cadastro.jsp</file>
+            <file>file:/Z:/semestre5/topint/ProjetoJSP/web/Login.jsp</file>
+            <file>file:/Z:/semestre5/topint/ProjetoJSP/src/java/Login.java</file>
+            <file>file:/Z:/semestre5/topint/ProjetoJSP/src/java/Cadastro.java</file>
+            <file>file:/Z:/semestre5/topint/ProjetoJSP/web/Compra.jsp</file>
+            <file>file:/Z:/semestre5/topint/ProjetoJSP/src/java/DAO/DAOUsuario.java</file>
+            <file>file:/Z:/semestre5/topint/ProjetoJSP/web/index.html</file>
+            <file>file:/Z:/semestre5/topint/ProjetoJSP/src/java/DAO/DAOEvento.java</file>
         </group>
     </open-files>
 </project-private>

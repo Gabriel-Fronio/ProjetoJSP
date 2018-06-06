@@ -7,6 +7,8 @@ package DAO;
 
 import DBO.DBOUsuario;
 import Connect.*;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 
 public class DAOUsuario {
     
@@ -14,20 +16,29 @@ public class DAOUsuario {
     {
         try
         {
-            MeuPreparedStatement bd = DAOs.getBD();//nome, cpf, sexo, dataNasc, tel, cep, end, email, senha
-            String sql = "INSERT INTO usuario VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            bd.prepareStatement(sql);
-            bd.setString(1, usr.getNome());
-            bd.setString(2, usr.getCpf());
-            bd.setString(3, usr.getSexo()+"");
-            bd.setDate(4, usr.getData());
-            bd.setString(5, usr.getTel());
-            bd.setString(6, usr.getCep());
-            bd.setString(7, usr.getEnd());
-            bd.setString(8, usr.getEmail());
-            bd.setString(9, usr.getSenha());
+            String senha = usr.getSenha();
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(senha.getBytes(), 0, senha.length());
+            senha = (new BigInteger(1,md.digest()).toString(32)).toString();
             
-            int ret = bd.executeUpdate();
+            if(getUsuario(usr.getEmail()) != null)
+                return false;
+                
+            
+            String sql = "INSERT INTO usuario VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            DAOs.getBD().prepareStatement(sql);
+            DAOs.getBD().setString(1, usr.getNome());
+            DAOs.getBD().setString(2, usr.getCpf());
+            DAOs.getBD().setString(3, usr.getSexo()+"");
+            DAOs.getBD().setDate(4, usr.getData());
+            DAOs.getBD().setString(5, usr.getTel());
+            DAOs.getBD().setString(6, usr.getCep());
+            DAOs.getBD().setString(7, usr.getEnd());
+            DAOs.getBD().setString(8, usr.getEmail());
+            DAOs.getBD().setString(9, senha);
+            
+            int ret = DAOs.getBD().executeUpdate();
+            DAOs.getBD().commit();
             if (ret > 0)
                 return true;
         }
@@ -44,11 +55,10 @@ public class DAOUsuario {
         DBOUsuario usr = null;
         try
         {
-            MeuPreparedStatement bd = DAOs.getBD();
-            String sql = "SELECT * FROM usuario WHERE email = "+email;
-            bd.prepareStatement(sql);
+            String sql = "SELECT * FROM usuario WHERE email = '"+email+"'";
+            DAOs.getBD().prepareStatement(sql);
             
-            MeuResultSet result = (MeuResultSet)bd.executeQuery();
+            MeuResultSet result = (MeuResultSet)DAOs.getBD().executeQuery();
             if(result.first())
                 usr = new DBOUsuario(result.getString("nome"), result.getString("cpf"), result.getString("telefone"),
                         result.getString("cep"), result.getString("endereco"), email, result.getString("senha"), 

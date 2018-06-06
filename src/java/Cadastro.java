@@ -62,8 +62,9 @@ public class Cadastro extends HttpServlet {
                 out.println("<title>Cadastro</title>");            
                 out.println("</head>");
                 out.println("<body>");
-                out.println("<h1>"+ nome +", você foi cadastrado com sucesso</h1>");
-                out.println("<h2>Teste: "+data0+"</h2>");
+                out.println("<h1>"+ nome +", você foi cadastrado com sucesso</h1><br>");
+                out.println("<a href='index.html'>Voltar</a><br>");
+                out.println("<a href='Login.jsp'>Logar</a>");
                 out.println("</body>");
                 out.println("</html>");
             }
@@ -76,7 +77,6 @@ public class Cadastro extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>"+ nome +", ocorreu um erro e voce nao pode ser cadastrado</h1>");
-                out.println("<h2>Teste: "+data0+"</h2>");
                 out.println("</body>");
                 out.println("</html>");
             }
