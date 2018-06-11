@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/web/index.html</file>
             <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/src/java/DAO/DAOEvento.java</file>
             <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/web/Compra.jsp</file>
-            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/src/java/Connect/DAOs.java</file>
             <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/web/escolheEvento.jsp</file>
+            <file>file:/C:/Users/gabri/OneDrive/Documentos/NetBeansProjects/ProjetoJSP/web/escolhaSetor.jsp</file>
         </group>
     </open-files>
 </project-private>

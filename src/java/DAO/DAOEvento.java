@@ -8,7 +8,10 @@ package DAO;
 import DBO.DBOEvento;
 import java.sql.Date;
 import Connect.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -29,7 +32,7 @@ public class DAOEvento {
         
         try
         {
-            String sql = "SELECT id FROM Evento WHERE nome='"+ev.getNome()+"' AND data="+dt.toString();
+            String sql = "SELECT id FROM Evento WHERE nome='"+ev.getNome()+"' AND data='"+(new SimpleDateFormat("yyyy-dd-MM")).format(dt)+"'";
             DAOs.getBD().prepareStatement(sql);
             MeuResultSet result = (MeuResultSet)DAOs.getBD().executeQuery();
             if(result.first())
@@ -47,11 +50,11 @@ public class DAOEvento {
      * @param even o DBOEvento cujo nome sera passado para o BD
      * @return Todas as datas as quais o evento com mesmo nome do parametro irao ocorrer
     */
-    public static List<Date> getDataPorEvento(DBOEvento even)
+    public static ArrayList<Date> getDataPorEvento(DBOEvento even)
     {
         if(even == null)
             return null;
-        List<Date> ret = null;
+        ArrayList<Date> ret = new ArrayList<Date>();
         try
         {
             String sql = "SELECT data FROM Evento WHERE nome='"+even.getNome()+"'";
@@ -60,7 +63,7 @@ public class DAOEvento {
             if(result.first())
                 do
                 {
-                    ret.add(Date.valueOf(result.getDate("data").toString()));
+                    ret.add(result.getDate("data"));
                 }
                 while(result.next());                
         }
@@ -77,14 +80,14 @@ public class DAOEvento {
      * @param data a data a ser verificada no BD
      * @return lista de eventos que ocorrerao naquele dia
      */
-    public static List<DBOEvento> getEventoPorData(Date data)
+    public static ArrayList<DBOEvento> getEventoPorData(Date data)
     {
         if(data == null)
             return null;
-        List<DBOEvento> ret = null;
+        ArrayList<DBOEvento> ret = new ArrayList<DBOEvento>();
         try
         {
-            String sql = "SELECT * FROM Evento WHERE data="+data.toString();
+            String sql = "SELECT * FROM Evento WHERE data='"+ (new SimpleDateFormat("yyyy-dd-MM")).format(data) +"'";
             DAOs.getBD().prepareStatement(sql);
             MeuResultSet result = (MeuResultSet)DAOs.getBD().executeQuery();
             if(result.first())
@@ -102,9 +105,9 @@ public class DAOEvento {
         return ret;
     }
     
-    public static List<DBOEvento> getAllEventos()
+    public static ArrayList<DBOEvento> getAllEventos()
     {
-        List<DBOEvento> ret = null;
+        ArrayList<DBOEvento> ret = new ArrayList<DBOEvento>();
         try
         {
             String sql = "SELECT * FROM Evento";
@@ -125,20 +128,20 @@ public class DAOEvento {
         return ret;
     }
     
-    public static List<Date> getAllDatas()
+    public static ArrayList<Date> getAllDatas()
     {
-        List<Date> ret;
+        ArrayList<Date> ret = new ArrayList<Date>();
         try
         {
-            String sql = "SELECT * FROM Evento";
+            String sql = "SELECT DISTINCT data FROM Evento";
             DAOs.getBD().prepareStatement(sql);
             MeuResultSet result = (MeuResultSet)DAOs.getBD().executeQuery();
             if(result.first())
                 do
                 {
-                    ret.add(Date.valueOf(result.getDate("data").toString()));
+                    ret.add(result.getDate("data"));
                 }
-                while(result.next());                
+                while(result.next());
         }
         catch(Exception e)
         {

@@ -36,9 +36,6 @@ public class Cadastro extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Enumeration<String> enu =  request.getParameterNames();
-        while(enu.hasMoreElements())
-            System.out.println(enu.nextElement());
         String nome = request.getParameter("nome") +" "+ request.getParameter("sobrenome");
         String cpf  = request.getParameter("cpf");
         char   sexo = request.getParameter("sexo").charAt(0);
