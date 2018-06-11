@@ -25,14 +25,14 @@ public class DAOEvento {
      * @param dt data que ocorrera o evento
      * @return -3 se algum erro inesperado ocorreu, -2 se algum dos parametros for nulo, -1 se nao houver tal evento em tal dia no BD, senao retorna o id do evento 
      */
-    public static int getIdEvento(DBOEvento ev, Date dt)
+    public static int getIdEvento(DBOEvento ev)
     {
         if(ev == null || dt == null)
             return -2;
         
         try
         {
-            String sql = "SELECT id FROM Evento WHERE nome='"+ev.getNome()+"' AND data='"+(new SimpleDateFormat("yyyy-dd-MM")).format(dt)+"'";
+            String sql = "SELECT id FROM Evento WHERE nome='"+ev.getNome()+"' AND data='"+(new SimpleDateFormat("yyyy-dd-MM")).format(ev.getData())+"'";
             DAOs.getBD().prepareStatement(sql);
             MeuResultSet result = (MeuResultSet)DAOs.getBD().executeQuery();
             if(result.first())
