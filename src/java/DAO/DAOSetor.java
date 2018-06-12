@@ -30,7 +30,7 @@ public class DAOSetor {
             if(result.first())
                 do
                 {
-                    ret.add(new DBOSetor(result.getInt("idSetor"), result.getInt("qtdIngressos"), result.getString("nome")));
+                    ret.add(new DBOSetor(result.getInt("idEvento"), result.getInt("qtdIngressos"), result.getString("nomeSetor")));
                 }
                 while(result.next());
             else
@@ -50,14 +50,13 @@ public class DAOSetor {
         
         try
         {
-            String sql = "SELECT * FROM setorEvento where idEvento = ?";
+            String sql = "SELECT * FROM setorEvento where idEvento = "+ idEvento;
             DAOs.getBD().prepareStatement(sql);
-            DAOs.getBD().setInt(1, idEvento);
             MeuResultSet result = (MeuResultSet)DAOs.getBD().executeQuery();
             if(result.first())
                 do
                 {
-                    ret.add(new DBOSetor(result.getInt("idSetor"), result.getInt("qtdIngressos"), result.getString("nome")));
+                    ret.add(new DBOSetor(result.getInt("idEvento"), result.getInt("qtdIngressos"), result.getString("nomeSetor")));
                 }
                 while(result.next());
             else
@@ -69,5 +68,25 @@ public class DAOSetor {
             return null;
         }
         return ret;
+    }
+    
+    public static int getIdSetor(DBOSetor setor)
+    {
+        if(setor == null)
+            return -2;
+        try
+        {
+            String sql = "SELECT codSetor FROM setorEvento WHERE idEvento="+setor.getIdEvento()+" AND nomeSetor='"+setor.getNomeSetor()+"' AND qtdIngressos="+setor.getQtdIngressos();
+            DAOs.getBD().prepareStatement(sql);
+            MeuResultSet result = (MeuResultSet)DAOs.getBD().executeQuery();
+            if(result.first())
+                return result.getInt("codSetor");
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            return -3;
+        }
+        return -1;
     }
 }

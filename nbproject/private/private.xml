@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/tecnico/semestre5/ProjetoJSP/web/escolheEvento.jsp</file>
-            <file>file:/F:/tecnico/semestre5/ProjetoJSP/src/java/DAO/DAOEvento.java</file>
-            <file>file:/F:/tecnico/semestre5/ProjetoJSP/web/escolhaSetor.jsp</file>
-            <file>file:/F:/tecnico/semestre5/ProjetoJSP/src/java/DBO/DBOSetor.java</file>
-            <file>file:/F:/tecnico/semestre5/ProjetoJSP/src/java/DAO/DAOSetor.java</file>
+            <file>file:/E:/tecnico/semestre5/ProjetoJSP/src/java/DAO/DAOSetor.java</file>
+            <file>file:/E:/tecnico/semestre5/ProjetoJSP/src/java/DBO/DBOIngresso.java</file>
+            <file>file:/E:/tecnico/semestre5/ProjetoJSP/src/java/DAO/DAOIngresso.java</file>
+            <file>file:/E:/tecnico/semestre5/ProjetoJSP/src/java/DBO/DBOSetor.java</file>
+            <file>file:/E:/tecnico/semestre5/ProjetoJSP/web/escolhaSetor.jsp</file>
+            <file>file:/E:/tecnico/semestre5/ProjetoJSP/web/escolhaIngressos.jsp</file>
+            <file>file:/E:/tecnico/semestre5/ProjetoJSP/web/Compra.jsp</file>
+            <file>file:/E:/tecnico/semestre5/ProjetoJSP/web/escolheEvento.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -63,7 +63,8 @@ public class Login extends HttpServlet {
                  }
                  else
                  {
-                     response.sendRedirect("Compra.jsp");
+                    request.getSession().setAttribute("login", usr.getEmail());
+                    response.sendRedirect("Compra.jsp");
                  }
             }
             else

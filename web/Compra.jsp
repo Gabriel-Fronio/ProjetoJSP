@@ -15,15 +15,20 @@
         <h1>Escolha a data do evento:</h1>
         <form method="POST" action="escolheEvento.jsp">
             <input list="datas" name="dataEvento">
-            <datalist id="datas">
                 <%
                     ArrayList<Date> datas = DAOEvento.getAllDatas();
-                    for(Date d : datas)
-                        if(d.after(Date.valueOf(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE))))
-                            out.println("<option>"+d.toString()+"</option>");
+                    if(datas != null)
+                    {
+                        out.println("<datalist id='datas'>");
+                        for(Date d : datas)
+                            if(d.after(Date.valueOf(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE))))
+                                out.println("<option>"+d.toString()+"</option>");
+                        out.println("</datalist><br>");
+                        out.println("<input type='submit' value='Ir'>");
+                    }
+                    else
+                        out.println("<br><h2 style='color:red'>Não há datas de eventos disponíveis</h2><br>");
                 %>
-            </datalist>
-            <input type="submit" value="Ir">
         </form>
     </body>
 </html>
