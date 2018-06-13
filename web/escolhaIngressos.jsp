@@ -1,3 +1,7 @@
+<%@page import="java.sql.Date"%>
+<%@page import="DBO.DBOSetor"%>
+<%@page import="DAO.DAOEvento"%>
+<%@page import="DBO.DBOEvento"%>
 <%@page import="DAO.DAOSetor"%>
 <%@page import="DBO.DBOIngresso"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,31 +15,48 @@
     </head>
     <body>
         <h1>Escolha a quantidade e o tipo de ingresso:</h1>
-        <form>
+        <form method="POST" action="fim.jsp">
             <%
-                //PEGAR O ID DO SETOR APENAS COM O NOME(n sei como n)
-                //DAOSetor.getIdSetor(new DBOSetor())
                 String setor = request.getParameter("setor");
-                int codSetor = Integer.parseInt(setor);
+                
+                int idEvt = DAOEvento.getIdEvento(new DBOEvento(session.getAttribute("evento").toString()
+                                            , Date.valueOf(session.getAttribute("data").toString())));
+                int codSetor = DAOSetor.getIdSetor(new DBOSetor(idEvt, 0, setor));
+                DBOSetor setorEscolhido = DAOSetor.getSetor(codSetor);
                 session.setAttribute("codSetor", codSetor);
-                ArrayList<DBOIngresso> ingressos =  DAOIngresso.getIngressoSetor(codSetor);
-                if(ingressos != null)
-                {
-                    out.println("<input list='ingressos' name='categoria'>");
-                    out.println("<datalist id='ingressos'>");
-                    for(DBOIngresso i : ingressos)
-                        out.println("<option>"+i.getCategoria()+"</option>");
-                    out.println("</datalist><br>");
+                
+                if(session.getAttribute("login") == null)
+                    out.println("<h2 style='color:red'><a href='Login.jsp' style='color:red'>Logue</a> antes de prosseguir na compra</h2>");
+                else{
+                
+                    ArrayList<DBOIngresso> ingressos =  DAOIngresso.getIngressoSetor(codSetor);
+                    if(ingressos != null)
+                    {
+                        int j=0;
+                        out.println("Quantidade de ingressos:");
+                        for(DBOIngresso i : ingressos)
+                        {
+                            out.println("<div id='categoriaIngresso' style='border:2px solid black; width:70%; align-self: center'>");
+                            out.println(i.getCategoria()+"  -  R$"+i.getPreco()+"<br>");
+                            
+                            
+                            int max = 20;
+                            if(setorEscolhido.getQtdIngressos()<20*ingressos.size())
+                                max = setorEscolhido.getQtdIngressos()/ingressos.size();
+                            out.println("<input type='number' max='"+max+"' min='0' name='ing"+j+"'>");
+                            out.println("</div><br>");
+                            j++;
+                        }
+                        %>
+
+                <input type="submit" value="Comprar">
+
+                        <%
+                    }
+                    else
+                        out.println("<h2 style='color:red'>Nao ha ingressos nessa sessao</h2>");
                 }
-                else
-                    out.println("<h2 style='color:red'>Nao ha ingressos nessa sessao</h2>");
             %>
         </form>
-        
-        <!-- 
-            LEMBRA DE FAZER A CONFIRMACAO DE COMPRA DE INGRESSOS AQUI
-            VERIFICACAO DE LOGIN AQ TB
-            (NUM INFRAME, DIV, SLA)
-        -->
     </body>
 </html>

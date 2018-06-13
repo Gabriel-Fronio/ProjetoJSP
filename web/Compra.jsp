@@ -14,16 +14,15 @@
     <body>
         <h1>Escolha a data do evento:</h1>
         <form method="POST" action="escolheEvento.jsp">
-            <input list="datas" name="dataEvento">
                 <%
                     ArrayList<Date> datas = DAOEvento.getAllDatas();
                     if(datas != null)
                     {
-                        out.println("<datalist id='datas'>");
+                        out.println("<select name='dataEvento'>");
                         for(Date d : datas)
                             if(d.after(Date.valueOf(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE))))
-                                out.println("<option>"+d.toString()+"</option>");
-                        out.println("</datalist><br>");
+                                out.println("<option value='"+d.toString()+"'>"+d.toString()+"</option>");
+                        out.println("</select><br>");
                         out.println("<input type='submit' value='Ir'>");
                     }
                     else

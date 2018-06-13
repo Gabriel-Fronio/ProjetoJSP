@@ -8,9 +8,9 @@
     <body>
         <h1>Login</h1>
         <form method="POST" action="Login" style="border: 2px solid black">
-            E-mail:<input type="email" id="email" name="email">
+            E-mail:<input type="email" id="email" name="email" required="true">
             <br>
-            Senha: <input type="password" id="senha" name="senha">
+            Senha: <input type="password" id="senha" name="senha" required="true">
             <br>
             <input type="submit" value="Logar">
         </form>

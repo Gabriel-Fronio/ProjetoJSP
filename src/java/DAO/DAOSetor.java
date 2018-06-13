@@ -76,7 +76,7 @@ public class DAOSetor {
             return -2;
         try
         {
-            String sql = "SELECT codSetor FROM setorEvento WHERE idEvento="+setor.getIdEvento()+" AND nomeSetor='"+setor.getNomeSetor()+"' AND qtdIngressos="+setor.getQtdIngressos();
+            String sql = "SELECT codSetor FROM setorEvento WHERE idEvento="+setor.getIdEvento()+" AND nomeSetor='"+setor.getNomeSetor()+"'";
             DAOs.getBD().prepareStatement(sql);
             MeuResultSet result = (MeuResultSet)DAOs.getBD().executeQuery();
             if(result.first())
@@ -88,5 +88,25 @@ public class DAOSetor {
             return -3;
         }
         return -1;
+    }
+    
+    public static DBOSetor getSetor(int id)
+    {
+        if(id < 0)
+            return null;
+        try
+        {
+            String sql = "SELECT * FROM setorEvento WHERE codSetor="+id;
+            DAOs.getBD().prepareStatement(sql);
+            MeuResultSet result = (MeuResultSet)DAOs.getBD().executeQuery();
+            if(result.first())
+                return new DBOSetor(result.getInt("idEvento"), result.getInt("qtdIngressos"), result.getString("nomeSetor"));
+            return null;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }

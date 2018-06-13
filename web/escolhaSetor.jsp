@@ -12,17 +12,19 @@
     <body>
         <h1>Escolha o setor:</h1>
         <form method="POST" action="escolhaIngressos.jsp">
-            <input list="setores" name="setor">
                 <%
                     String evento = request.getParameter("evento");
                     ArrayList<DBOSetor> setores = DAOSetor.getSetorEvento(DAOEvento.getIdEvento(new DBOEvento(evento, Date.valueOf(session.getAttribute("data").toString()))));
                     session.setAttribute("evento", evento);
                     if(setores != null)
                     {
-                        out.println("<datalist id='setores'>");
+                        out.println("<select name='setor'>");
                         for(DBOSetor s : setores)
-                            out.println("<option value='"+s.getNomeSetor() +"'>Ingressos disponíveis:"+s.getQtdIngressos()+"</option>");
-                        out.println("</datalist><br>");
+                            if(s.getQtdIngressos()>0)
+                                out.println("<option value='"+ s.getNomeSetor() +"'>"+s.getNomeSetor()+" - "+s.getQtdIngressos()+" ingressos disponíveis</option>");
+                            else
+                                out.println("<option value='"+ s.getNomeSetor() +"' disabled>"+s.getNomeSetor()+" - esgotado </option>");
+                        out.println("</select><br>");
                         out.println("<input type='submit' value='Continuar'>");
                     }
                     else
